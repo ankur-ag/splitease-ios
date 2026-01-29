@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  SplitwiseWebView
+//  SplitEaseWebView
 //
 //  Complete working example for iOS WebView with Tip Jar
 //  IMPORTANT: Make sure this is your actual ViewController.swift file
