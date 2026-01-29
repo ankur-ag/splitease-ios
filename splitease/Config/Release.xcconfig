@@ -1,0 +1,3 @@
+// Release.xcconfig
+// Backend URL for Release / TestFlight builds
+BACKEND_URL = https:/$()/splitease.launchstack.work/

@@ -27,6 +27,8 @@
 		92CF187E2F0F3A10005E579B /* splitease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = splitease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CF18942F0F3A11005E579B /* spliteaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = spliteaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CF189E2F0F3A11005E579B /* spliteaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = spliteaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92CF18B42F0F3A11005E579B /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = splitease/Config/Debug.xcconfig; sourceTree = "<group>"; };
+		92CF18B52F0F3A11005E579B /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = splitease/Config/Release.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -289,9 +291,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L7B5G4NH3A;
+				DEVELOPMENT_TEAM = 39BJ68ZRUU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = splitease/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -302,7 +305,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = apex.splitease;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyre.splitease;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -317,9 +320,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L7B5G4NH3A;
+				DEVELOPMENT_TEAM = 39BJ68ZRUU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = splitease/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -330,7 +334,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = apex.splitease;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyre.splitease;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -340,6 +344,7 @@
 		};
 		92CF18AA2F0F3A11005E579B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92CF18B42F0F3A11005E579B /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -403,6 +408,7 @@
 		};
 		92CF18AB2F0F3A11005E579B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92CF18B52F0F3A11005E579B /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -467,7 +473,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = apex.spliteaseTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyre.spliteaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -486,7 +492,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = apex.spliteaseTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyre.spliteaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -503,7 +509,7 @@
 				DEVELOPMENT_TEAM = L7B5G4NH3A;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = apex.spliteaseUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyre.spliteaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -520,7 +526,7 @@
 				DEVELOPMENT_TEAM = L7B5G4NH3A;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = apex.spliteaseUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyre.spliteaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;

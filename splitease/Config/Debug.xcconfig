@@ -1,0 +1,3 @@
+// Debug.xcconfig
+// Backend URL for Debug builds
+BACKEND_URL = http:/$()/localhost:3000
