@@ -27,14 +27,16 @@
 		92CF187E2F0F3A10005E579B /* splitease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = splitease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CF18942F0F3A11005E579B /* spliteaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = spliteaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CF189E2F0F3A11005E579B /* spliteaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = spliteaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		92CF18B42F0F3A11005E579B /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = splitease/Config/Debug.xcconfig; sourceTree = "<group>"; };
-		92CF18B52F0F3A11005E579B /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = splitease/Config/Release.xcconfig; sourceTree = "<group>"; };
+		92CF18B42F0F3A11005E579B /* splitease/Config/Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = splitease/Config/Debug.xcconfig; sourceTree = "<group>"; };
+		92CF18B52F0F3A11005E579B /* splitease/Config/Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = splitease/Config/Release.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		92CF18A62F0F3A11005E579B /* Exceptions for "splitease" folder in "splitease" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Config/Debug.xcconfig,
+				Config/Release.xcconfig,
 				Info.plist,
 			);
 			target = 92CF187D2F0F3A10005E579B /* splitease */;
@@ -87,6 +89,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		922B42F72F2CB09700087E64 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				92CF18B42F0F3A11005E579B /* splitease/Config/Debug.xcconfig */,
+				92CF18B52F0F3A11005E579B /* splitease/Config/Release.xcconfig */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		92CF18752F0F3A10005E579B = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +105,7 @@
 				92CF18972F0F3A11005E579B /* spliteaseTests */,
 				92CF18A12F0F3A11005E579B /* spliteaseUITests */,
 				92CF187F2F0F3A10005E579B /* Products */,
+				922B42F72F2CB09700087E64 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,7 +198,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1620;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					92CF187D2F0F3A10005E579B = {
 						CreatedOnToolsVersion = 16.2;
@@ -344,7 +356,7 @@
 		};
 		92CF18AA2F0F3A11005E579B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92CF18B42F0F3A11005E579B /* Debug.xcconfig */;
+			baseConfigurationReference = 92CF18B42F0F3A11005E579B /* splitease/Config/Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -401,6 +413,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -408,7 +421,7 @@
 		};
 		92CF18AB2F0F3A11005E579B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92CF18B52F0F3A11005E579B /* Release.xcconfig */;
+			baseConfigurationReference = 92CF18B52F0F3A11005E579B /* splitease/Config/Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -458,6 +471,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
