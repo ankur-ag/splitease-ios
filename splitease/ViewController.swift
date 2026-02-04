@@ -36,6 +36,15 @@ class ViewController: UIViewController {
         let userContentController = WKUserContentController()
         // Register the tip jar message handler
         userContentController.add(self, name: "tipJar")
+        // Register the app store rating handler
+        userContentController.add(self, name: "appStoreRating")
+        
+        // Inject a flag to let the web app know it's running in native iOS
+        // This is more reliable than checking for message handlers or user agent
+        let source = "window.isNativeApp = true;"
+        let script = WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+        userContentController.addUserScript(script)
+        
         webConfiguration.userContentController = userContentController
         
         print("🔧 Bridge setup: tipJar handler registered")
@@ -142,8 +151,21 @@ extension ViewController: WKScriptMessageHandler {
         if message.name == "tipJar" {
             print("💰 Tip jar requested from web app")
             showTipJar()
+        } else if message.name == "appStoreRating" {
+            print("⭐ App store rating requested")
+            requestAppStoreReview()
         } else {
             print("⚠️ Unknown message handler: \(message.name)")
+        }
+    }
+    
+    @MainActor
+    func requestAppStoreReview() {
+        print("⭐ Requesting App Store Review")
+        if let windowScene = view.window?.windowScene {
+            SKStoreReviewController.requestReview(in: windowScene)
+        } else {
+            print("❌ Could not find window scene for review")
         }
     }
     
