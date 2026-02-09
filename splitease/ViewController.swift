@@ -46,6 +46,12 @@ class ViewController: UIViewController {
         let script = WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: true)
         userContentController.addUserScript(script)
         
+        // Inject app version so web app can display it
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
+        let versionSource = "window.appVersion = \"\(appVersion)\";"
+        let versionScript = WKUserScript(source: versionSource, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+        userContentController.addUserScript(versionScript)
+        
         webConfiguration.userContentController = userContentController
         
         print("🔧 Bridge setup: tipJar handler registered")
