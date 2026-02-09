@@ -13,6 +13,7 @@ import StoreKit
 class ViewController: UIViewController {
     var webView: WKWebView!
     var loadingIndicator: UIActivityIndicatorView!
+    var dimmingView: UIView? // Custom dimming view for overlays
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,11 +81,47 @@ class ViewController: UIViewController {
             return
         }
         
+        // If we have a saved deep link URL that hasn't been handled yet, use that instead
+        if let pendingUrl = UserDefaults.standard.url(forKey: "pendingDeepLinkUrl") {
+            UserDefaults.standard.removeObject(forKey: "pendingDeepLinkUrl")
+            print("🔗 Using pending deep link URL: \(pendingUrl)")
+            loadUrl(pendingUrl)
+            return
+        }
+        
+        loadUrl(url)
+    }
+    
+    func loadUrl(_ url: URL) {
         let request = URLRequest(url: url)
         webView.load(request)
         loadingIndicator.startAnimating()
+        print("🌐 Loading URL: \(url.absoluteString)")
+    }
+
+    // MARK: - UI Helpers
+    func addDimmingView() {
+        let dimView = UIView(frame: view.bounds)
+        dimView.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        dimView.alpha = 0
+        dimView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(dimView)
+        dimmingView = dimView
         
-        print("🌐 Loading app from: \(urlString)")
+        UIView.animate(withDuration: 0.2) {
+            dimView.alpha = 1
+        }
+    }
+
+    func removeDimmingView() {
+        guard let dimView = dimmingView else { return }
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            dimView.alpha = 0
+        }) { _ in
+            dimView.removeFromSuperview()
+            self.dimmingView = nil
+        }
     }
 }
 
@@ -224,6 +261,9 @@ extension ViewController: WKScriptMessageHandler {
     func showTipOptions(products: [Product]) {
         print("💝 Showing tip options with \(products.count) products")
         
+        // Add dimming view for better focus
+        addDimmingView()
+        
         // Sort products by price (low to high)
         let sortedProducts = products.sorted { product1, product2 in
             return product1.price < product2.price
@@ -255,14 +295,17 @@ extension ViewController: WKScriptMessageHandler {
             
             let title = "\(tipLabel) - \(price)"
             print("📝 Adding tip option: \(title) for product \(product.id)")
-            alert.addAction(UIAlertAction(title: title, style: .default) { _ in
+            alert.addAction(UIAlertAction(title: title, style: .default) { [weak self] _ in
+                self?.removeDimmingView()
                 Task {
-                    await self.purchaseTip(product: product)
+                    await self?.purchaseTip(product: product)
                 }
             })
         }
         
-        alert.addAction(UIAlertAction(title: "Maybe Later", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
+            self?.removeDimmingView()
+        })
         
         // For iPad
         if let popover = alert.popoverPresentationController {

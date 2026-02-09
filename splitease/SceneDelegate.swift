@@ -17,6 +17,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        // Handle Cold Start Deep Link
+        if let userActivity = connectionOptions.userActivities.first,
+           userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+           let url = userActivity.webpageURL {
+            print("🔗 Cold start deep link received: \(url.absoluteString)")
+            UserDefaults.standard.set(url, forKey: "pendingDeepLinkUrl")
+        }
+    }
+    
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        // Handle Warm Start Deep Link
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+              let url = userActivity.webpageURL else {
+            return
+        }
+        
+        print("🔗 Warm start deep link received: \(url.absoluteString)")
+        
+        // Try to handle with root ViewController
+        if let rootVC = window?.rootViewController as? ViewController {
+            rootVC.loadUrl(url)
+            return
+        }
+        
+        // Try to handle with NavigationController
+        if let navVC = window?.rootViewController as? UINavigationController,
+           let rootVC = navVC.viewControllers.first as? ViewController {
+            rootVC.loadUrl(url)
+            return
+        }
+        
+        // Only if view hierarchy is not ready or accessible
+        print("⚠️ Could not find ViewController to handle deep link, saving for later")
+        UserDefaults.standard.set(url, forKey: "pendingDeepLinkUrl")
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
