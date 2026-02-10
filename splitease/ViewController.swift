@@ -365,20 +365,24 @@ extension ViewController: WKScriptMessageHandler {
                     
                     // Mark that user has donated
                     UserDefaults.standard.set(true, forKey: "hasDonated")
-                    print("✅ Donation recorded")
+                    print("✅ Donation recorded, will not ask again")
+                    
+                    showThankYouMessage()
                 case .unverified(_, let error):
                     print("Transaction unverified: \(error)")
+                    showError("Payment verification failed. Please try again.")
                 }
             case .userCancelled:
                 // User cancelled, do nothing
                 break
             case .pending:
-                print("Payment is pending. Thank you!")
+                showMessage("Payment is pending. Thank you!")
             @unknown default:
                 break
             }
         } catch {
             print("Purchase error: \(error)")
+            showError("Failed to process tip. Please try again.")
         }
     }
     
