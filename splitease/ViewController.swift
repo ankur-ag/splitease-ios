@@ -13,6 +13,7 @@ import StoreKit
 class ViewController: UIViewController {
     var webView: WKWebView!
     var loadingIndicator: UIActivityIndicatorView!
+    var refreshControl: UIRefreshControl!
     var dimmingView: UIView? // Custom dimming view for overlays
     
     override func viewDidLoad() {
@@ -61,6 +62,11 @@ class ViewController: UIViewController {
         webView.navigationDelegate = self
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
+        // Setup Refresh Control
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshWebView), for: .valueChanged)
+        webView.scrollView.refreshControl = refreshControl
+        
         // Enable Safari Web Inspector for debugging
         #if DEBUG
         webView.isInspectable = true
@@ -104,6 +110,11 @@ class ViewController: UIViewController {
         loadingIndicator.startAnimating()
         print("🌐 Loading URL: \(url.absoluteString)")
     }
+    
+    @objc func refreshWebView() {
+        print("🔄 Pull-to-refresh triggered")
+        webView.reload()
+    }
 
     // MARK: - UI Helpers
     func addDimmingView() {
@@ -134,11 +145,15 @@ class ViewController: UIViewController {
 // MARK: - WKNavigationDelegate
 extension ViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        loadingIndicator.startAnimating()
+        // Only show the center spinner if we're not pulling to refresh
+        if !refreshControl.isRefreshing {
+            loadingIndicator.startAnimating()
+        }
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         loadingIndicator.stopAnimating()
+        refreshControl.endRefreshing()
         print("✅ Page loaded successfully")
         
         // Verify bridge is accessible from JavaScript
@@ -159,6 +174,7 @@ extension ViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         loadingIndicator.stopAnimating()
+        refreshControl.endRefreshing()
         
         let errorMessage = """
         Failed to load app:
